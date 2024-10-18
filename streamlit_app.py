@@ -105,13 +105,13 @@ st.plotly_chart(pie_fig)
 
 
 
-sector_counts = employeedata['Sector'].value_counts()
+sector_counts = employeedata['Sectoren'].value_counts()
 
 sector_fig = px.pie(
     names=sector_counts.index,
     values=sector_counts.values,
     title='Distribution of Companies by Sector',
-    labels={'names': 'Sector'},
+    labels={'names': 'Sectoren'},
     color_discrete_sequence=px.colors.qualitative.T10,
 )
 
