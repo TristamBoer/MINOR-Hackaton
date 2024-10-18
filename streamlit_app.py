@@ -234,12 +234,6 @@ df_monthly = df.groupby('month')['energy'].sum().reset_index()
 # Streamlit interface
 st.title('Opbrengst van Zonnepanelen')
 
-# Selectiebox voor de frequentie
-frequentie = st.selectbox(
-    'Selecteer de frequentie van de opbrengstweergave:',
-    ['Dagelijks', 'Wekelijks', 'Maandelijks']
-)
-
 st.write(
     '''
     Dit overzicht toont wanneer de zonnepanelen optimaal werken en wanneer ze minder efficiënt zijn. 
@@ -248,6 +242,12 @@ st.write(
     Wanneer de zonnestraling (Q) hoog is en de temperatuur binnen een geschikt bereik ligt, neemt de energieproductie toe. Bij extreme hitte of bewolkte dagen, wanneer de zonnestraling laag is, daalt de efficiëntie.
     Deze inzichten kunnen helpen om te bepalen wanneer zonnepanelen het meeste rendement opleveren, wat handig is voor het optimaliseren van energiebeheer en investeringen in zonne-energie.
     '''
+)
+
+# Selectiebox voor de frequentie
+frequentie = st.selectbox(
+    'Selecteer de frequentie van de opbrengstweergave:',
+    ['Dagelijks', 'Wekelijks', 'Maandelijks']
 )
 
 # Maak de figuur
@@ -292,6 +292,16 @@ panel_options = [12000, 13000, 14000, 15000]
 # Streamlit interface
 st.title('Opbrengst van Zonnepanelen in Sloterdijk Noord Poort')
 
+st.write(
+    '''
+    Deze grafiek toont de energieopbrengst van de huidige 12.000 zonnepanelen op het terrein en geeft 
+    inzicht in hoeveel extra energie gegenereerd kan worden bij een eventuele opschaling van het aantal zonnepanelen.
+    Door verschillende scenario’s te vergelijken (bijvoorbeeld 13.000, 14.000 en 15.000 panelen), 
+    wordt zichtbaar hoeveel meer energie kan worden opgewekt naarmate het aantal zonnepanelen toeneemt. 
+    Dit kan helpen bij strategische beslissingen voor uitbreiding, omdat het laat zien welk rendement te verwachten is na een vergroting van de capaciteit.
+    '''
+)
+
 # Selectiebox voor het aantal zonnepanelen
 selected_panels = st.selectbox(
     'Selecteer het aantal zonnepanelen:',
@@ -303,17 +313,6 @@ df['energy'] = (df['Q'] * panel_capacity * selected_panels) / 1000  # omzetten n
 
 # Dagelijkse opbrengst
 df_daily = df.groupby(df['date'].dt.date)['energy'].sum().reset_index()
-
-
-st.write(
-    '''
-    Deze grafiek toont de energieopbrengst van de huidige 12.000 zonnepanelen op het terrein en geeft 
-    inzicht in hoeveel extra energie gegenereerd kan worden bij een eventuele opschaling van het aantal zonnepanelen.
-    Door verschillende scenario’s te vergelijken (bijvoorbeeld 13.000, 14.000 en 15.000 panelen), 
-    wordt zichtbaar hoeveel meer energie kan worden opgewekt naarmate het aantal zonnepanelen toeneemt. 
-    Dit kan helpen bij strategische beslissingen voor uitbreiding, omdat het laat zien welk rendement te verwachten is na een vergroting van de capaciteit.
-    '''
-)
 
 # Maak de figuur
 fig = go.Figure()
