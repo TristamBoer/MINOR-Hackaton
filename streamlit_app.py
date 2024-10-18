@@ -71,7 +71,7 @@ st.title("Sloterdijk Poort Noord Employee Data")
 labels = employeedata['Bedrijf']
 max_values = employeedata['Aantal max']
 min_values = employeedata['Aantal min']
-sectors = employeedata['Sector']
+sectors = employeedata['Sectoren']
 
 MinMax = st.selectbox("Minimum Estimated or Maximum Estimated employees", ("Minimum", "Maximum"))
 
