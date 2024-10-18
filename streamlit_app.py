@@ -76,38 +76,6 @@ max_values = employeedata['Aantal max']
 min_values = employeedata['Aantal min']
 sectors = employeedata['Sector']
 
-# Create a bar chart with both max and min employees
-fig = go.Figure()
-
-# Adding traces for min and max employee counts
-fig.add_trace(go.Bar(
-    x=labels,
-    y=min_values,
-    name='Min Employees',
-    marker_color='blue'
-))
-
-fig.add_trace(go.Bar(
-    x=labels,
-    y=max_values,
-    name='Max Employees',
-    marker_color='orange'
-))
-
-# Update layout of the bar chart
-fig.update_layout(
-    title='Estimated Minimum and Maximum Employees',
-    xaxis_title='Company',
-    yaxis_title='Employee Count',
-    barmode='group',
-    xaxis_tickangle=-45,
-    margin=dict(t=100, b=150),
-    height=600
-)
-
-# Display the chart in Streamlit
-st.plotly_chart(fig)
-
 # Dropdown to choose between maximum estimates and minimum estimates
 MinMax = st.selectbox("Minimum Estimated or Maximum Estimated employees", ("Minimum", "Maximum"))
 
