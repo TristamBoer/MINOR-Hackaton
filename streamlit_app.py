@@ -40,7 +40,7 @@ df_werknemers['Aantal'] = round(((df_werknemers['Aantal min'] + df_werknemers['A
 st.title('Aantal bekende werknemers per bedrijf')
 st.write(
     '''
-    Door een online map gemaakt door bedrijven op kaart, kan een schatting worden gemaakt voor de aantal werknemers per bedrijf.
+    Door een online map gemaakt door 'Bedrijven Op Kaart', kan een schatting worden gemaakt voor de aantal werknemers per bedrijf.
     De cijfers in het figuur is gebaseerd op het afgeronde gemiddelde van de schatting. 
     Van niet alle bedrijven is de data bekend.
     Als dit het geval is, wordt het bedrijf niet mee genomen in het figuur.
