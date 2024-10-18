@@ -64,14 +64,14 @@ st.plotly_chart(fig)
 
 
 
-employeedata = eigen_excel_file('Werknemers')
+# employeedata = eigen_excel_file('Werknemers')
 
 st.title("Sloterdijk Poort Noord Employee Data")
 
-labels = employeedata['Bedrijf']
-max_values = employeedata['Aantal max']
-min_values = employeedata['Aantal min']
-sectors = employeedata['Sector']
+labels = df_werknemers['Bedrijf']
+max_values = df_werknemers['Aantal max']
+min_values = df_werknemers['Aantal min']
+sectors = df_werknemers['Sector']
 
 MinMax = st.selectbox("Minimum Estimated or Maximum Estimated employees", ("Minimum", "Maximum"))
 
