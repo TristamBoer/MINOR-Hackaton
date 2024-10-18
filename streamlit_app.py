@@ -240,6 +240,16 @@ frequentie = st.selectbox(
     ['Dagelijks', 'Wekelijks', 'Maandelijks']
 )
 
+st.write(
+    '''
+    Dit overzicht toont wanneer de zonnepanelen optimaal werken en wanneer ze minder efficiënt zijn. 
+    Deze analyse is gebaseerd op data van het KNMI-station in De Bilt, waarbij de temperatuur (T) en de zonnestraling (Q) zijn gebruikt om het energieopbrengstpotentieel van de zonnepanelen te berekenen.
+    Zonnepanelen werken het best bij een combinatie van gunstige zonnestraling en gematigde temperaturen. In dit model heb ik berekend hoe deze factoren samenhangen met de prestaties van zonnepanelen. 
+    Wanneer de zonnestraling (Q) hoog is en de temperatuur binnen een geschikt bereik ligt, neemt de energieproductie toe. Bij extreme hitte of bewolkte dagen, wanneer de zonnestraling laag is, daalt de efficiëntie.
+    Deze inzichten kunnen helpen om te bepalen wanneer zonnepanelen het meeste rendement opleveren, wat handig is voor het optimaliseren van energiebeheer en investeringen in zonne-energie.
+    '''
+)
+
 # Maak de figuur
 fig = go.Figure()
 
@@ -293,6 +303,17 @@ df['energy'] = (df['Q'] * panel_capacity * selected_panels) / 1000  # omzetten n
 
 # Dagelijkse opbrengst
 df_daily = df.groupby(df['date'].dt.date)['energy'].sum().reset_index()
+
+
+st.write(
+    '''
+    Deze grafiek toont de energieopbrengst van de huidige 12.000 zonnepanelen op het terrein en geeft 
+    inzicht in hoeveel extra energie gegenereerd kan worden bij een eventuele opschaling van het aantal zonnepanelen.
+    Door verschillende scenario’s te vergelijken (bijvoorbeeld 13.000, 14.000 en 15.000 panelen), 
+    wordt zichtbaar hoeveel meer energie kan worden opgewekt naarmate het aantal zonnepanelen toeneemt. 
+    Dit kan helpen bij strategische beslissingen voor uitbreiding, omdat het laat zien welk rendement te verwachten is na een vergroting van de capaciteit.
+    '''
+)
 
 # Maak de figuur
 fig = go.Figure()
