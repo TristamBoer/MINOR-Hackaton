@@ -29,7 +29,7 @@ st.write(
 )
 
 
-
+# https://app.bedrijvenopdekaart.nl/?bodkdata=N4IgZiBcDaIIYBsEgLoBoQCMrWgFgDoB2ANgE4BGNAVgCYC8AGEvdfAgDgoGYyb6mLNoQ6M8VOgW4cSJYcSIc+k6bJQoAvkA
 @st.cache_data
 def eigen_excel_file(sheet):
     return pd.read_excel('MINOR - Hackaton - werknemer aantal.xlsx', sheet)
@@ -37,7 +37,7 @@ def eigen_excel_file(sheet):
 df_werknemers = eigen_excel_file('Werknemers')
 df_werknemers['Aantal'] = round(((df_werknemers['Aantal min'] + df_werknemers['Aantal max']) / 2), 0).astype(int)
 
-st.title('Aantal bekende werknemers per bedrijf')
+st.title('Aantal bekende werknemers per bedrijf') 
 st.write(
     '''
     Door een online map gemaakt door 'Bedrijven Op Kaart', kan een schatting worden gemaakt voor de aantal werknemers per bedrijf.
@@ -61,6 +61,104 @@ fig.update_layout(
 )
 
 st.plotly_chart(fig)
+
+
+
+
+employeedata = eigen_excel_file('Werknemers')
+
+# Set the title of the app
+st.title("Sloterdijk Poort Noord Employee Data")
+
+# Prepare data for plotting
+labels = employeedata['Bedrijf']
+max_values = employeedata['Aantal max']
+min_values = employeedata['Aantal min']
+sectors = employeedata['Sector']
+
+# Create a bar chart with both max and min employees
+fig = go.Figure()
+
+# Adding traces for min and max employee counts
+fig.add_trace(go.Bar(
+    x=labels,
+    y=min_values,
+    name='Min Employees',
+    marker_color='blue'
+))
+
+fig.add_trace(go.Bar(
+    x=labels,
+    y=max_values,
+    name='Max Employees',
+    marker_color='orange'
+))
+
+# Update layout of the bar chart
+fig.update_layout(
+    title='Estimated Minimum and Maximum Employees',
+    xaxis_title='Company',
+    yaxis_title='Employee Count',
+    barmode='group',
+    xaxis_tickangle=-45,
+    margin=dict(t=100, b=150),
+    height=600
+)
+
+# Display the chart in Streamlit
+st.plotly_chart(fig)
+
+# Dropdown to choose between maximum estimates and minimum estimates
+MinMax = st.selectbox("Minimum Estimated or Maximum Estimated employees", ("Minimum", "Maximum"))
+
+# Define autopct formatting for percentage cutoff
+def autopct_format(values):
+    total = sum(values)
+    return [f'{v / total * 100:.1f}%' if v / total >= 0.02 else '' for v in values]
+
+# Create pie charts for the selected option
+if MinMax == "Maximum":
+    # Create a pie chart showing the distribution of max employees
+    pie_fig = px.pie(
+        names=labels,
+        values=max_values,
+        title='Distribution of Max Employees by Company',
+        labels={'names': 'Company'},
+        color_discrete_sequence=px.colors.qualitative.T10,
+    )
+    pie_fig.update_traces(textinfo='label+percent', pull=[0.1 if value/sum(max_values) > 0.02 else 0 for value in max_values])
+
+elif MinMax == "Minimum":
+    # Create a pie chart showing the distribution of min employees
+    pie_fig = px.pie(
+        names=labels,
+        values=min_values,
+        title='Distribution of Min Employees by Company',
+        labels={'names': 'Company'},
+        color_discrete_sequence=px.colors.qualitative.T10,
+    )
+    pie_fig.update_traces(textinfo='label+percent', pull=[0.1 if value/sum(min_values) > 0.02 else 0 for value in min_values])
+
+# Display the pie chart in Streamlit
+st.plotly_chart(pie_fig)
+
+# Create a pie chart showing the distribution of sectors
+sector_counts = employeedata['Sector'].value_counts()
+
+# Create pie chart for sector distribution
+sector_fig = px.pie(
+    names=sector_counts.index,
+    values=sector_counts.values,
+    title='Distribution of Companies by Sector',
+    labels={'names': 'Sector'},
+    color_discrete_sequence=px.colors.qualitative.T10,
+)
+
+# Update the traces to display percentages
+sector_fig.update_traces(textinfo='label+percent')
+
+# Display the pie chart in Streamlit
+st.plotly_chart(sector_fig)
 
 
 
