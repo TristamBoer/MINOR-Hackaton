@@ -12,9 +12,23 @@ from streamlit_folium import st_folium
 def page_config():
     st.set_page_config(layout='wide')
 
+
 page_config()
 
-st.title('Voorspelling gas & stroom gebruik tot 2050')
+
+st.title('Dashboard Hackaton Data Science 2024')
+st.write(
+    '''
+    Welkom bij de dashboard van groep 2 voor de Hackaton van de Minor Data Science 2024. 
+    De Hackaton gaat de overgang naar duurzame energie in de Nederlandse logistieke sector.
+    Een belangrijk onderdeel hiervan is de overstap naar emissie-vrije mobiliteit.
+    Daarvoor is ons te taak gegeven om een bijdrage te leveren aan dit doel door twee bedrijventerreinen een overzicht te maken van alle factoren die energie vragen.
+    De dashboard is gericht op het centraliseren van verschillende online vindbare datasets.
+    Hierbij is er gekeken naar de enerievraag van de panden, aantal werknemers per bedrijf en de aansluitingen van het netbeheer.
+    '''
+)
+
+
 
 @st.cache_data
 def eigen_excel_file(sheet):
@@ -38,6 +52,10 @@ fig.update_layout(
 
 st.plotly_chart(fig)
 
+
+
+
+st.title('Voorspelling gas & stroom gebruik tot 2050')
 
 
 @st.cache_data
