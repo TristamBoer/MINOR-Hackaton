@@ -234,7 +234,7 @@ fig.add_trace(go.Bar(
     x=filtered_verbruik['Utiliteitsbouw dienstensector'],
     y=filtered_verbruik['Totaal aardgasverbruik (m3)'],
     name='Totaal Gasverbruik (m³)',
-    marker_color='lightblue'
+    marker_color='blue'
 ))
 
 # Barplot voor totaal elektriciteitsverbruik
