@@ -503,7 +503,7 @@ def aantal_zonnepalen_map():
 
 
 map_display = aantal_zonnepalen_map()
-st_folium(map_display, width=1600)
+st_folium(map_display, width=1400)
 
 
 st.title('Vermogen van zonnepanelen per bedrijf')
@@ -530,7 +530,7 @@ def heatmap_map():
 
 
 map_display_2 = heatmap_map()
-st_folium(map_display_2, width=1600)
+st_folium(map_display_2, width=1400)
 
 
 
