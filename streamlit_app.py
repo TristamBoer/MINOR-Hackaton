@@ -477,6 +477,14 @@ st.write(
 )
 
 
+st.markdown("""
+    <style>
+    .folium-map {
+        margin-bottom: -50px; /* Adjust this value to control the space */
+    }
+    </style>
+    """, unsafe_allow_html=True)
+
 def aantal_zonnepalen_map():
     m = folium.Map(
         location=[52.395714, 4.792993],
