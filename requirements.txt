@@ -6,3 +6,4 @@ folium
 scikit-learn
 streamlit_folium
 openpyxl
+plotly_express
