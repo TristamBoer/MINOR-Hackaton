@@ -5,3 +5,4 @@ numpy
 folium
 scikit-learn
 streamlit_folium
+openpyxl
