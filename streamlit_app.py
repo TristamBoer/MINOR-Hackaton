@@ -480,7 +480,7 @@ st.write(
 st.markdown("""
     <style>
     .folium-map {
-        margin-bottom: -50px; /* Adjust this value to control the space */
+        margin-bottom: -250px; /* Adjust this value to control the space */
     }
     </style>
     """, unsafe_allow_html=True)
