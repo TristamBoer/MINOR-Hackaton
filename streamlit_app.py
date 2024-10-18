@@ -7,6 +7,7 @@ import numpy as np
 import folium
 from folium.plugins import HeatMap
 from streamlit_folium import st_folium
+import plotly_express as px
 
 
 def page_config():
