@@ -64,29 +64,22 @@ st.plotly_chart(fig)
 
 
 
-
 employeedata = eigen_excel_file('Werknemers')
 
-# Set the title of the app
 st.title("Sloterdijk Poort Noord Employee Data")
 
-# Prepare data for plotting
 labels = employeedata['Bedrijf']
 max_values = employeedata['Aantal max']
 min_values = employeedata['Aantal min']
 sectors = employeedata['Sector']
 
-# Dropdown to choose between maximum estimates and minimum estimates
 MinMax = st.selectbox("Minimum Estimated or Maximum Estimated employees", ("Minimum", "Maximum"))
 
-# Define autopct formatting for percentage cutoff
 def autopct_format(values):
     total = sum(values)
     return [f'{v / total * 100:.1f}%' if v / total >= 0.02 else '' for v in values]
 
-# Create pie charts for the selected option
 if MinMax == "Maximum":
-    # Create a pie chart showing the distribution of max employees
     pie_fig = px.pie(
         names=labels,
         values=max_values,
@@ -97,7 +90,6 @@ if MinMax == "Maximum":
     pie_fig.update_traces(textinfo='label+percent', pull=[0.1 if value/sum(max_values) > 0.02 else 0 for value in max_values])
 
 elif MinMax == "Minimum":
-    # Create a pie chart showing the distribution of min employees
     pie_fig = px.pie(
         names=labels,
         values=min_values,
@@ -107,13 +99,13 @@ elif MinMax == "Minimum":
     )
     pie_fig.update_traces(textinfo='label+percent', pull=[0.1 if value/sum(min_values) > 0.02 else 0 for value in min_values])
 
-# Display the pie chart in Streamlit
 st.plotly_chart(pie_fig)
 
-# Create a pie chart showing the distribution of sectors
+
+
+
 sector_counts = employeedata['Sector'].value_counts()
 
-# Create pie chart for sector distribution
 sector_fig = px.pie(
     names=sector_counts.index,
     values=sector_counts.values,
