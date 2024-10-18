@@ -16,6 +16,29 @@ page_config()
 
 st.title('Voorspelling gas & stroom gebruik tot 2050')
 
+@st.cache_data
+def eigen_excel_file(sheet):
+    return pd.read_excel('MINOR - Hackaton - werknemer aantal.xlsx', sheet)
+
+df_werknemers = eigen_excel_file('Werknemers')
+df_werknemers['Aantal'] = round(((df_werknemers['Aantal min'] + df_werknemers['Aantal max']) / 2), 0).astype(int)
+
+fig = go.Figure()
+
+fig.add_trace(go.Bar(
+    x=df_werknemers['Bedrijf'],
+    y=df_werknemers['Aantal']
+))
+
+fig.update_layout(
+    title='Aantal werknemers per bedrijf in Sloterdijk Poort Noord',
+    xaxis_title='Bedrijf',
+    yaxis_title='Aantal werknemers'
+)
+
+st.plotly_chart(fig)
+
+
 
 @st.cache_data
 def verbruik_excel():
@@ -421,30 +444,6 @@ def heatmap_map():
 
 map_display_2 = heatmap_map()
 st_folium(map_display_2, width=1600)
-
-
-@st.cache_data
-def eigen_excel_file(sheet):
-    return pd.read_excel('MINOR - Hackaton - werknemer aantal.xlsx', sheet)
-
-
-# df_werknemers = eigen_excel_file('Werknemers')
-# df_werknemers['Aantal'] = round(((df_werknemers['Aantal min'] + df_werknemers['Aantal max']) / 2), 0).astype(int)
-#
-# fig = go.Figure()
-#
-# fig.add_trace(go.Bar(
-#     x=df_werknemers['Bedrijf'],
-#     y=df_werknemers['Aantal']
-# ))
-#
-# fig.update_layout(
-#     title='Aantal werknemers per bedrijf in Sloterdijk Poort Noord',
-#     xaxis_title='Bedrijf',
-#     yaxis_title='Aantal werknemers'
-# )
-#
-# st.plotly_chart(fig)
 
 
 
